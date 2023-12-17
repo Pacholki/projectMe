@@ -1,2 +1,6 @@
 # projectMe
-Repository for our project for TWD
+
+## Authors
+@korneltlaczala @Zajaczkowskim
+
+Repository for our TWD project
