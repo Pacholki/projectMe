@@ -14,15 +14,18 @@ def json2csv(dir_path, out_path):
     
     def is_group():
         if participant_count == 2:
-            return "0"
-        return "1"
+            return False
+        return True
 
-    def get_receivers():
+    def get_receiver_name(sender_name):
+
+        if is_group():
+            return dir_name
         
-        receivers = []
         for participant in data["participants"]:
-            receivers.append(participant["name"])
-        return receivers
+            if participant["name"] != sender_name:
+                return participant["name"]
+        return None
 
     csv_file_path = f"{out_path}/{dir_name}.csv"
     with open (csv_file_path, "w", newline="", encoding="latin-1") as csv_file:
@@ -32,15 +35,15 @@ def json2csv(dir_path, out_path):
 
         for message in data['messages']:
             sender_name = message.get("sender_name", "")
+            receiver_name = get_receiver_name(sender_name=sender_name)
             timestamp = message.get("timestamp_ms", "")
             content = message.get("content", "")
-
 
             reactions = ", ".join([reaction["reaction"] + "-" + reaction["actor"] for reaction in message.get("reactions", [])])
             photos = ', '.join([photo['uri'] for photo in message.get('photos', [])])
             videos = ', '.join([video['uri'] for video in message.get('videos', [])])
 
-            csv_writer.writerow([is_group(), sender_name, timestamp, content, reactions, photos, videos])
+            csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, reactions, photos, videos])
 
 def all_json2csv(base_dir, out_dir):
 
