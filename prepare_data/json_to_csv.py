@@ -27,23 +27,28 @@ def json2csv(dir_path, out_path):
                 return participant["name"]
         return None
 
+    def count_words(message):
+        return len(message.split(" "))
+
     csv_file_path = f"{out_path}/{dir_name}.csv"
     with open (csv_file_path, "w", newline="", encoding="latin-1") as csv_file:
         
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(["is_group", "sender_name", "receiver_name", "timestamp", "content", "reactions", "photos", "videos"])
+        csv_writer.writerow(["is_group", "sender_name", "receiver_name", "timestamp", "content", "char_count", "word_count", "reactions", "photos", "videos"])
 
         for message in data['messages']:
             sender_name = message.get("sender_name", "")
             receiver_name = get_receiver_name(sender_name=sender_name)
             timestamp = message.get("timestamp_ms", "")
             content = message.get("content", "")
+            char_count = len(content)
+            word_count = count_words(content)
 
             reactions = ", ".join([reaction["reaction"] + "-" + reaction["actor"] for reaction in message.get("reactions", [])])
             photos = ', '.join([photo['uri'] for photo in message.get('photos', [])])
             videos = ', '.join([video['uri'] for video in message.get('videos', [])])
 
-            csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, reactions, photos, videos])
+            csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, char_count, word_count, reactions, photos, videos])
 
 def all_json2csv(base_dir, out_dir):
 
