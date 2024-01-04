@@ -16,17 +16,25 @@ def json2csv(dir_path, out_path):
         if participant_count == 2:
             return "0"
         return "1"
-    
+
+    def get_receivers():
+        
+        receivers = []
+        for participant in data["participants"]:
+            receivers.append(participant["name"])
+        return receivers
+
     csv_file_path = f"{out_path}/{dir_name}.csv"
     with open (csv_file_path, "w", newline="", encoding="latin-1") as csv_file:
         
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(["is_group", "sender_name", "timestamp", "content", "reactions", "photos", "videos"])
+        csv_writer.writerow(["is_group", "sender_name", "receiver_name", "timestamp", "content", "reactions", "photos", "videos"])
 
         for message in data['messages']:
             sender_name = message.get("sender_name", "")
             timestamp = message.get("timestamp_ms", "")
             content = message.get("content", "")
+
 
             reactions = ", ".join([reaction["reaction"] + "-" + reaction["actor"] for reaction in message.get("reactions", [])])
             photos = ', '.join([photo['uri'] for photo in message.get('photos', [])])
