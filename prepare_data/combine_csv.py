@@ -28,4 +28,5 @@ def combine_csv(csv_dir_path):
 if __name__ == "__main__":
 
     csv_dir_path = "csv_data"
+    os.remove(os.path.join(csv_dir_path, "combined.csv"))
     combine_csv(csv_dir_path)

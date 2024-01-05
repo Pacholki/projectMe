@@ -53,21 +53,26 @@ def json2csv(dir_path, out_path):
     with open (csv_file_path, "w", newline="", encoding="latin-1") as csv_file:
         
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(["is_group", "sender_name", "receiver_name", "timestamp", "content", "char_count", "word_count", "reactions", "photo_extensions", "videos"])
+        csv_writer.writerow(["is_group", "sender_name", "receiver_name", "timestamp", "content", "char_count", "word_count", "reactions", "photo_ext", "video_ext", "reaction_count", "photo_count", "video_count"])
 
         for message in data['messages']:
             sender_name = message.get("sender_name", "")
             receiver_name = get_receiver_name(sender_name=sender_name)
+
             timestamp = message.get("timestamp_ms", "")
             content = message.get("content", "")
             char_count = len(content)
             word_count = count_words(content)
 
             reactions = ", ".join([reaction["reaction"] + "-" + reaction["actor"] for reaction in message.get("reactions", [])])
-            photo_extensions = ', '.join([photo['uri'][-3:] for photo in message.get('photos', [])])
-            videos = ', '.join([video['uri'][-3:] for video in message.get('videos', [])])
+            photo_ext = ', '.join([photo['uri'][-3:] for photo in message.get('photos', [])])
+            video_ext = ', '.join([video['uri'][-3:] for video in message.get('videos', [])])
+            reaction_count = len(message.get("reactions", []))
+            photo_count = len(message.get("photos", []))
+            video_count = len(message.get("videos", []))
 
-            csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, char_count, word_count, reactions, photo_extensions, videos])
+
+            csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, char_count, word_count, reactions, photo_ext, video_ext, reaction_count, photo_count, video_count])
 
 def all_json2csv(base_dir, out_dir):
 
