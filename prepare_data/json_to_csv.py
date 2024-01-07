@@ -71,7 +71,6 @@ def json2csv(dir_path, out_path):
             photo_count = len(message.get("photos", []))
             video_count = len(message.get("videos", []))
 
-
             csv_writer.writerow([is_group(), sender_name, receiver_name, timestamp, content, char_count, word_count, reactions, photo_ext, video_ext, reaction_count, photo_count, video_count])
 
 def all_json2csv(base_dir, out_dir):
