@@ -1,9 +1,17 @@
 library(shiny)
 library(dplyr)
 library(networkD3)
+library(lubridate)
+library(ggplot2)
+library(tidytext)
+library(stringi)
+library(plotly)
 
 
-words_Michal <- read.csv("michalWords.csv")
+# words_Michal <- read.csv("michalWords.csv")
+# words_Mateusz <- read.csv("mateuszWords.csv")
+# data_Mateusz <- read.csv("mateuszCombinedNoContent.csv")
+# data_Michal <- read.csv("michalCombinedNoContent.csv")
 
 
 shinyServer(function(input, output, session){
@@ -90,4 +98,89 @@ shinyServer(function(input, output, session){
     )
 
   })
+  
+  #drugi wykres
+  output$plotKiedy <- renderPlot({
+    
+    df <- data() %>%
+      mutate(timestamp =  as.POSIXct(timestamp / 1000, origin="1970-01-01"))%>%
+      filter(sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch", ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski"))) %>%
+      mutate(Date = as.Date(timestamp),
+             Time = format(timestamp, "%H:%M:%Y"),
+             Hour = hour(timestamp),
+             Month = month(timestamp),
+             Day = day(timestamp))
+    
+    if(input$time == "Hour"){
+    p <- ggplot(df, aes(x = Hour)) + 
+      geom_bar(fill = "#0594ff")+
+      labs(x = "Hour", y = "Number of Sent Messages") +
+      scale_x_continuous(breaks = seq(0, 23, 1))
+    }
+    if(input$time == "Day Of Month"){
+      p <- ggplot(df, aes(x = Day)) + 
+        geom_bar(fill = "#0594ff")+
+        labs(x = "Day Of Month", y = "Number of Sent Messages") +
+        scale_x_continuous(breaks = seq(1, 31, 1))
+    }
+    if(input$time == "Month"){
+      p <- ggplot(df, aes(x = factor(Month)))+ 
+        geom_bar(fill = "#0594ff")+
+        labs(x = "Month", y = "Number of Sent Messages") + 
+        scale_x_discrete(name = "Month", labels = month.abb) 
+    }
+    p + theme(
+      plot.background = element_rect(fill = "transparent"),
+      panel.background = element_rect(fill = "transparent"),
+      axis.text = element_text( size = rel(1.5), family = "Arial Black"),
+      axis.title = element_text( size = rel(1.5), family = "Arial Black"))
+    
+    
+  })
+  
+  #kolejny wykres
+  output$plotGrupy <- renderPlot({
+    data() %>% 
+      filter(sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch", ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski"))) %>% 
+      group_by(is_group) %>% 
+      summarise(n = n()) %>% 
+      mutate(is_group = ifelse(is_group == "False", "Not in Groups", "In Groups")) %>%
+      ggplot(aes(x = is_group, y= n))+
+      geom_col(fill = "#0594ff") +
+      labs(x = "",
+           y = "Number of Messages")+
+      theme(
+             plot.background = element_rect(fill = "transparent"),
+             panel.background = element_rect(fill = "transparent"),
+             axis.text = element_text( size = rel(1.5), family = "Arial Black"),
+             axis.title = element_text( size = rel(1.5), family = "Arial Black"))
+  })
+  
+  #i nastepny, do kogo najwiecej
+output$plotZKim <- renderPlot({
+  plotdata <- data() %>%
+    filter(
+      sender_name == ifelse(
+        input$user == "Mateusz", "Mati Deptuch",
+        ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski")
+      )
+    ) %>%
+    group_by(receiver_name) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n)) %>%
+    head(10)
+  
+  ggplot(plotdata, aes(x = reorder(receiver_name, n), y = n)) +
+    geom_col(fill ="#0594ff" ) +
+    coord_flip() +
+    theme(
+      plot.background = element_rect(fill = "transparent"),
+      panel.background = element_rect(fill = "transparent"),
+      axis.text = element_text( size = rel(1.5), family = "Arial Black"),
+      axis.title = element_text( size = rel(1.5), family = "Arial Black")) +
+    labs(x = "Number of sent messages",
+         y = "Person/Group Name")
+  
+})
+  
 })
