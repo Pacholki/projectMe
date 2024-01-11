@@ -21,6 +21,33 @@ grafUI <- fluidPage(
   )
 )
 
+plotKiedyUI <- fluidPage(
+  fluidRow(
+    titlePanel("Kiedy najczęściej piszemy?"),
+    radioButtons("time",
+                 "Wybierz dla jakiej zmiennej chcesz poznać rozkład",
+                 choices = c("Month", "Day Of Month", "Hour"),
+                 selected = "Hour"),
+    
+    plotOutput("plotKiedy")
+  )
+)
+
+plotGrupyUI <- fluidPage(
+  fluidRow(
+    titlePanel("Gdzie najczęściej piszemy?"),
+    
+    plotOutput("plotGrupy")
+  )
+)
+
+plotZKimUI <- fluidPage(
+  fluidRow(
+    titlePanel("Do kogo najczęściej piszemy?"),
+    plotOutput("plotZKim")
+  )
+)
+
 
 shinyUI(
   dashboardPage(
@@ -37,7 +64,7 @@ shinyUI(
                  menuSubItem("Wykres1",
                              tabName = "wykres1"),
                  menuSubItem("Wykres2",
-                             tabName = "wykresdrugi")
+                             tabName = "wykres2")
                  ),
                 
         menuItem("Co piszemy?", icon = icon("comment-dots"),
@@ -74,8 +101,10 @@ shinyUI(
                     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
                   ),
       tabItems(
-        tabItem("wykres1", grafUI),
-        tabItem("wykresdrugi", h4("000000000000000000000")),
+        tabItem("wykres3", grafUI),
+        tabItem("wykres5", plotKiedyUI),
+        tabItem("wykres2", plotGrupyUI),
+        tabItem("wykres1", plotZKimUI),
         tabItem("costam", h4("fsefswefwsefwsedfsf"))
         
        
