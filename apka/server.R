@@ -8,10 +8,10 @@ library(stringi)
 library(plotly)
 
 
-# words_Michal <- read.csv("michalWords.csv")
-# words_Mateusz <- read.csv("mateuszWords.csv")
-# data_Mateusz <- read.csv("mateuszCombinedNoContent.csv")
-# data_Michal <- read.csv("michalCombinedNoContent.csv")
+words_Michal <- read.csv("michalWords.csv")
+words_Mateusz <- read.csv("mateuszWords.csv")
+data_Mateusz <- read.csv("mateuszCombinedNoContent.csv")
+data_Michal <- read.csv("michalCombinedNoContent.csv")
 
 
 shinyServer(function(input, output, session){
@@ -87,7 +87,7 @@ shinyServer(function(input, output, session){
       opacityNoHover = 1,
       legend = TRUE,
       fontFamily = "Arial",
-      fontSize = 12, 
+      fontSize = 12
     )
     
     htmlwidgets::onRender(
@@ -112,15 +112,24 @@ shinyServer(function(input, output, session){
              Day = day(timestamp))
     
     if(input$time == "Hour"){
-    p <- ggplot(df, aes(x = Hour)) + 
-      geom_bar(fill = "#0594ff")+
-      labs(x = "Hour", y = "Number of Sent Messages") +
+      plotdata <- df %>% 
+        group_by(Hour) %>% 
+        summarise(n = n())
+      plotdata$n <- plotdata$n / 365
+      
+    p <- ggplot(plotdata, aes(x = Hour, y = n)) + 
+      geom_col(fill = "#0594ff")+
+      labs(x = "Hour", y = "Average Number of Sent Messages") +
       scale_x_continuous(breaks = seq(0, 23, 1))
     }
     if(input$time == "Day Of Month"){
-      p <- ggplot(df, aes(x = Day)) + 
-        geom_bar(fill = "#0594ff")+
-        labs(x = "Day Of Month", y = "Number of Sent Messages") +
+      plotdata <- df %>% 
+        group_by(Day) %>% 
+        summarise(n = n())
+      plotdata$n <- plotdata$n / 12
+      p <- ggplot(plotdata, aes(x = Day, y = n)) + 
+        geom_col(fill = "#0594ff")+
+        labs(x = "Day Of Month", y = "Average Number of Sent Messages") +
         scale_x_continuous(breaks = seq(1, 31, 1))
     }
     if(input$time == "Month"){
@@ -132,8 +141,8 @@ shinyServer(function(input, output, session){
     p + theme(
       plot.background = element_rect(fill = "transparent"),
       panel.background = element_rect(fill = "transparent"),
-      axis.text = element_text( size = rel(1.5), family = "Arial Black"),
-      axis.title = element_text( size = rel(1.5), family = "Arial Black"))
+      axis.text = element_text( size = rel(1.5), family = "Helvetica Neue"),
+      axis.title = element_text( size = rel(1.5), family = "Helvetica Neue"))
     
     
   })
