@@ -33,18 +33,32 @@ plotKiedyUI <- fluidPage(
   )
 )
 
-plotGrupyUI <- fluidPage(
-  fluidRow(
-    titlePanel("Gdzie najczęściej piszemy?"),
-    
-    plotOutput("plotGrupy")
-  )
-)
+# plotGrupyUI <- fluidPage(
+#   fluidRow(
+#     titlePanel("Gdzie najczęściej piszemy?"),
+#     
+#     plotOutput("plotGrupy")
+#   )
+# )
 
 plotZKimUI <- fluidPage(
   fluidRow(
-    titlePanel("Do kogo najczęściej piszemy?"),
+    radioButtons("zKim",
+                 "",
+                 choices = c("Groups", "People", "All"),
+                 selected = "All"),
+    titlePanel("Do kogo najwięcej piszemy?"),
     plotOutput("plotZKim")
+  )
+)
+plotOdKogoUI <- fluidPage(
+  fluidRow(
+    radioButtons("odKogo",
+                 "",
+                 choices = c("Groups", "People", "All"),
+                 selected = "All"),
+    titlePanel("Kto do nas najwięcej pisze?"),
+    plotOutput("plotOdKogo")
   )
 )
 
@@ -103,7 +117,7 @@ shinyUI(
       tabItems(
         tabItem("wykres3", grafUI),
         tabItem("wykres5", plotKiedyUI),
-        tabItem("wykres2", plotGrupyUI),
+        tabItem("wykres2", plotOdKogoUI),
         tabItem("wykres1", plotZKimUI),
         tabItem("costam", h4("fsefswefwsefwsedfsf"))
         
