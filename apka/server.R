@@ -148,32 +148,39 @@ shinyServer(function(input, output, session){
   })
   
   #kolejny wykres
-  output$plotGrupy <- renderPlot({
-    data() %>% 
-      filter(sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch", ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski"))) %>% 
-      group_by(is_group) %>% 
-      summarise(n = n()) %>% 
-      mutate(is_group = ifelse(is_group == "False", "Not in Groups", "In Groups")) %>%
-      ggplot(aes(x = is_group, y= n))+
-      geom_col(fill = "#0594ff") +
-      labs(x = "",
-           y = "Number of Messages")+
-      theme(
-             plot.background = element_rect(fill = "transparent"),
-             panel.background = element_rect(fill = "transparent"),
-             axis.text = element_text( size = rel(1.5), family = "Arial Black"),
-             axis.title = element_text( size = rel(1.5), family = "Arial Black"))
-  })
+  # output$plotGrupy <- renderPlot({
+  #   data() %>% 
+  #     filter(sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch", ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski"))) %>% 
+  #     group_by(is_group) %>% 
+  #     summarise(n = n()) %>% 
+  #     mutate(is_group = ifelse(is_group == "False", "Not in Groups", "In Groups")) %>%
+  #     ggplot(aes(x = is_group, y= n))+
+  #     geom_col(fill = "#0594ff") +
+  #     labs(x = "",
+  #          y = "Number of Messages")+
+  #     theme(
+  #            plot.background = element_rect(fill = "transparent"),
+  #            panel.background = element_rect(fill = "transparent"),
+  #            axis.text = element_text( size = rel(1.5), family = "Arial Black"),
+  #            axis.title = element_text( size = rel(1.5), family = "Arial Black"))
+  # })
   
   #i nastepny, do kogo najwiecej
 output$plotZKim <- renderPlot({
+  who <- case_when(
+    input$zKim == "Groups" ~ c("True"),
+    input$zKim == "People" ~ c("False"),
+    input$zKim == "All" ~ c("True", "False")
+  )
+  
   plotdata <- data() %>%
     filter(
       sender_name == ifelse(
         input$user == "Mateusz", "Mati Deptuch",
         ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski")
       )
-    ) %>%
+    ) %>% 
+    filter(is_group %in% who)%>%
     group_by(receiver_name) %>%
     summarise(n = n()) %>%
     arrange(desc(n)) %>%
@@ -190,6 +197,38 @@ output$plotZKim <- renderPlot({
     labs(x = "Number of sent messages",
          y = "Person/Group Name")
   
+})
+
+output$plotOdKogo <- renderPlot({
+  who <- case_when(
+    input$odKogo == "Groups" ~ c("True"),
+    input$odKogo == "People" ~ c("False"),
+    input$odKogo == "All" ~ c("True", "False")
+  )
+  
+  plotdata <- data() %>%
+    filter(
+      sender_name != ifelse(
+        input$user == "Mateusz", "Mati Deptuch",
+        ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski")
+      )
+    ) %>% 
+    filter(is_group %in% who)%>%
+    group_by(sender_name) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n)) %>%
+    head(10)
+  
+  ggplot(plotdata, aes(x = reorder(sender_name, n), y = n)) +
+    geom_col(fill ="#0594ff" ) +
+    coord_flip() +
+    theme(
+      plot.background = element_rect(fill = "transparent"),
+      panel.background = element_rect(fill = "transparent"),
+      axis.text = element_text( size = rel(1.5), family = "Arial Black"),
+      axis.title = element_text( size = rel(1.5), family = "Arial Black")) +
+    labs(x = "Number of sent messages",
+         y = "Person Name")
 })
   
 })
