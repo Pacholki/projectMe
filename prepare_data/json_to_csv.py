@@ -90,7 +90,6 @@ def all_json2csv(base_dir, out_dir):
 
         if os.path.isdir(dir_path):
             json2csv(dir_path, out_dir)
-            # print("success, converted " + dir.split('_')[0])
 
     print(f"{len(os.listdir(out_dir))} files converted from JSON to CSV")
 
