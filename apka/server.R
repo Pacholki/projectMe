@@ -200,7 +200,7 @@ output$plotZKim <- renderPlot({
          y = "Number of sent messages")
 })
 
-output$plotOdKogo <- renderPlot({
+output$plotOdKogo <- renderPlotly({
   who <- case_when(
     input$odKogo == "Groups" ~ c("True"),
     input$odKogo == "People" ~ c("False"),
@@ -220,16 +220,14 @@ output$plotOdKogo <- renderPlot({
     arrange(desc(n)) %>%
     head(10)
   
-  ggplot(plotdata, aes(x = reorder(sender_name, n), y = n)) +
-    geom_col(fill ="#0594ff" ) +
-    coord_flip() +
-    theme(
-      plot.background = element_rect(fill = "transparent"),
-      panel.background = element_rect(fill = "transparent"),
-      axis.text = element_text( size = rel(1.5), family = "Arial Black"),
-      axis.title = element_text( size = rel(1.5), family = "Arial Black")) +
-    labs(x = "Person/Group Name",
-         y = "Number of sent messages")
+  plot_ly(plotdata, x = ~n, y = ~reorder(sender_name, n), type = 'bar', marker = list(color = "#0594ff")) %>%
+    layout(
+      xaxis = list(title = "Number of Sent Messages"),
+      yaxis = list(title = "Person/Group Name"),
+      plot_bgcolor = "transparent",
+      paper_bgcolor = "transparent",
+      font = list(size = 16, family = "Arial Black")
+    )
 })
   
 })

@@ -59,7 +59,7 @@ plotOdKogoUI <- fluidPage(
                  choices = c("Groups", "People", "All"),
                  selected = "All"),
     titlePanel("Kto do nas najwięcej pisze?"),
-    plotOutput("plotOdKogo")
+    plotlyOutput("plotOdKogo")
   )
 )
 
