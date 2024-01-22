@@ -10,8 +10,10 @@ library(plotly)
 
 words_Michal <- read.csv("michalWords.csv")
 words_Mateusz <- read.csv("mateuszWords.csv")
+words_Kornel <- read.csv("kornelWords.csv")
 data_Mateusz <- read.csv("mateuszCombinedNoContent.csv")
 data_Michal <- read.csv("michalCombinedNoContent.csv")
+data_Kornel <- read.csv("kornelCombinedNoContent.csv")
 
 
 shinyServer(function(input, output, session){
