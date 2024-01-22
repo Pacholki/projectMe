@@ -81,23 +81,9 @@ shinyUI(
                  menuSubItem("Kto do nas pisze",
                              tabName = "wykres2")
                  ),
-                
-        menuItem("Co piszemy?", icon = icon("comment-dots"),
-                 menuSubItem("Wykres1",
-                             tabName = "wykres3"),
-                 menuSubItem("Wykres2",
-                             tabName = "Wykres4")
-                 ),
-        
-        menuItem("Ile piszemy", icon = icon("clock"),
-                 menuSubItem("Wykres1",
-                             tabName = "wykres5"),
-                 menuSubItem("Wykres2",
-                             tabName = "Wykres6")
-                 ),
-        menuItem("Cos", icon = icon("clock"), tabName = "costam"
-        ),
-        
+        menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
+        menuItem("Ile piszemy", icon = icon("clock"), tabName = "wykres5"),
+        menuItem("Cos", icon = icon("clock"), tabName = "costam"),
         
         menuItem(selectInput("user",
                              "Wybierz osobę: ",
