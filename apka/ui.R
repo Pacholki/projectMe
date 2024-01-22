@@ -76,9 +76,9 @@ shinyUI(
         id = 'tabs',
         
         menuItem("Z kim piszemy?", icon = icon("users"),
-                 menuSubItem("Wykres1",
+                 menuSubItem("Do kogo piszemy",
                              tabName = "wykres1"),
-                 menuSubItem("Wykres2",
+                 menuSubItem("Kto do nas pisze",
                              tabName = "wykres2")
                  ),
                 
@@ -89,7 +89,7 @@ shinyUI(
                              tabName = "Wykres4")
                  ),
         
-        menuItem("Czas", icon = icon("clock"),
+        menuItem("Ile piszemy", icon = icon("clock"),
                  menuSubItem("Wykres1",
                              tabName = "wykres5"),
                  menuSubItem("Wykres2",
