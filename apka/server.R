@@ -196,9 +196,8 @@ output$plotZKim <- renderPlot({
       panel.background = element_rect(fill = "transparent"),
       axis.text = element_text( size = rel(1.5), family = "Arial Black"),
       axis.title = element_text( size = rel(1.5), family = "Arial Black")) +
-    labs(x = "Number of sent messages",
-         y = "Person/Group Name")
-  
+    labs(x = "Person/Group Name",
+         y = "Number of sent messages")
 })
 
 output$plotOdKogo <- renderPlot({
@@ -229,8 +228,8 @@ output$plotOdKogo <- renderPlot({
       panel.background = element_rect(fill = "transparent"),
       axis.text = element_text( size = rel(1.5), family = "Arial Black"),
       axis.title = element_text( size = rel(1.5), family = "Arial Black")) +
-    labs(x = "Number of sent messages",
-         y = "Person Name")
+    labs(x = "Person/Group Name",
+         y = "Number of sent messages")
 })
   
 })
