@@ -57,7 +57,6 @@ plotOdKogoUI <- fluidPage(
 
 shinyUI(
   dashboardPage(
-    # dashboardHeader(title = span("Messenger",style = "color:#ff6967")),
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
                                    "Messenger", style="color:white")),
     
@@ -94,7 +93,7 @@ shinyUI(
         tabItem("wykres3", grafUI),
         tabItem("wykres5", plotKiedyUI),
         tabItem("wykres2", plotOdKogoUI),
-        tabItem("wykres1", plotZKimUI),
+        tabItem("wykres1", plotZKimUI)
       )
     ),
   )
