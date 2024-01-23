@@ -58,7 +58,7 @@ plotOdKogoUI <- fluidPage(
 shinyUI(
   dashboardPage(
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
-                                   "Messenger", class = "white-text")),
+                                   "MENELIZER", class = "white-text")),
     
     dashboardSidebar(
       sidebarMenu(
@@ -67,8 +67,8 @@ shinyUI(
         menuItem("Z kim piszemy?", icon = icon("users"),
                  menuSubItem("Do kogo piszemy", tabName = "wykres1"),
                  menuSubItem("Kto do nas pisze", tabName = "wykres2")),
-        menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
         menuItem("Ile piszemy", icon = icon("clock"), tabName = "wykres5"),
+        menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
         
         menuItem(selectInput("user",
                              "Wybierz osobę: ",
@@ -77,12 +77,12 @@ shinyUI(
                                "Michał"),
                              selected = 'Michał'),
                  icon = icon("user")
-        )
+        ),
+        class = "fa-2x"
       )
     ),
     
-    dashboardBody("Body",
-                  tags$head(
+    dashboardBody(tags$head(
                     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
                   ),
       tabItems(

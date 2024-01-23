@@ -1,0 +1,38 @@
+.main-header {
+    max-height: none;
+}
+
+.main-header .navbar {
+    height: var(--title-height);
+    margin-left: var(--sidebar-width);
+}
+
+.logo .white-text {
+    font-weight: bold;
+    font-size: 45px;
+    user-select: none;
+}
+
+.logo .white-text:hover {
+    color: var(--mywhite)
+}
+
+.skin-blue .main-header .logo {
+    background-color: var(--navbar-top-blue);
+    height: var(--header-height);
+    width: var(--sidebar-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:unset;
+}
+
+.skin-blue .main-header .logo:hover {
+    background-color: var(--navbar-top-blue);
+}
+
+.skin-blue .main-header .logo>a>img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
