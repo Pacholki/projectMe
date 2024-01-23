@@ -75,7 +75,6 @@ shinyUI(
         
         menuItem(selectInput("user",
                              "Wybierz osobę: ",
-                             
                              c("Mateusz",
                                "Kornel",
                                "Michał"),
@@ -87,7 +86,7 @@ shinyUI(
     
     dashboardBody("Body",
                   tags$head(
-                    tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+                    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
                   ),
       tabItems(
         tabItem("wykres3", grafUI),
