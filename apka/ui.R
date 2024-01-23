@@ -58,7 +58,7 @@ plotOdKogoUI <- fluidPage(
 shinyUI(
   dashboardPage(
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
-                                   "Messenger", style="color:white")),
+                                   "Messenger", class = "white-text")),
     
     dashboardSidebar(
       sidebarMenu(
