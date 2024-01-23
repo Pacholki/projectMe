@@ -34,14 +34,6 @@ plotKiedyUI <- fluidPage(
   )
 )
 
-# plotGrupyUI <- fluidPage(
-#   fluidRow(
-#     titlePanel("Gdzie najczęściej piszemy?"),
-#     
-#     plotOutput("plotGrupy")
-#   )
-# )
-
 plotZKimUI <- fluidPage(
   fluidRow(
     radioButtons("zKim",
@@ -49,7 +41,7 @@ plotZKimUI <- fluidPage(
                  choices = c("Groups", "People", "All"),
                  selected = "All"),
     titlePanel("Do kogo najwięcej piszemy?"),
-    plotOutput("plotZKim")
+    plotlyOutput("plotZKim")
   )
 )
 plotOdKogoUI <- fluidPage(
@@ -59,17 +51,14 @@ plotOdKogoUI <- fluidPage(
                  choices = c("Groups", "People", "All"),
                  selected = "All"),
     titlePanel("Kto do nas najwięcej pisze?"),
-    plotOutput("plotOdKogo")
+    plotlyOutput("plotOdKogo")
   )
 )
 
-
 shinyUI(
   dashboardPage(
-    # dashboardHeader(title = span("Messenger",style = "color:#ff6967")),
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
                                    "Messenger", style="color:white")),
-    
     
     dashboardSidebar(
       sidebarMenu(
@@ -83,7 +72,6 @@ shinyUI(
                  ),
         menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
         menuItem("Ile piszemy", icon = icon("clock"), tabName = "wykres5"),
-        menuItem("Cos", icon = icon("clock"), tabName = "costam"),
         
         menuItem(selectInput("user",
                              "Wybierz osobę: ",
@@ -105,13 +93,8 @@ shinyUI(
         tabItem("wykres3", grafUI),
         tabItem("wykres5", plotKiedyUI),
         tabItem("wykres2", plotOdKogoUI),
-        tabItem("wykres1", plotZKimUI),
-        tabItem("costam", h4("fsefswefwsefwsedfsf"))
-        
-       
+        tabItem("wykres1", plotZKimUI)
       )
     ),
-    
-    
   )
 )
