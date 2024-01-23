@@ -67,7 +67,7 @@ shinyUI(
         menuItem("Z kim piszemy?", icon = icon("users"),
                  menuSubItem("Do kogo piszemy", tabName = "wykres1"),
                  menuSubItem("Kto do nas pisze", tabName = "wykres2")),
-        menuItem("Ile piszemy", icon = icon("clock"), tabName = "wykres5"),
+        menuItem("Kiedy piszemy", icon = icon("clock"), tabName = "wykres5"),
         menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
         
         menuItem(selectInput("user",

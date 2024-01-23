@@ -1,5 +1,6 @@
 :root {
     --mywhite: #F8FAFC;
+    --mygray: #b8c7ce;
     --navbar-blue: #212B4E;
     --navbar-top-blue: #284679;
     --body-blue: #182039;
@@ -7,12 +8,20 @@
 
     --chart-bar-blue: #30579B;
 
+    --accent-blue: #3c8dbc;
+    --accent-pink: #F85582;
+
     --header-height: 140px;
     --title-height: 100px;
     --sidebar-width: 450px;
+}
+
+body {
+    overflow: hidden;
 }
 
 .white-text {
     color: var(--mywhite);
     font-family: "Open Sans";
 }
+
