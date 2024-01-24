@@ -13,6 +13,7 @@ To see the app click
 div align="center">
   <img src="Visualizations/app1.png" width="600"/>
 </div>
+
 ### Other panels
 div align="center">
   <img src="Visualizations/app2.png" width="600"/>
