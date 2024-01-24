@@ -40,6 +40,12 @@ shinyServer(function(input, output, session){
       words_Michal
     }
   })
+
+  pageTitle <- "Siema i cie nie ma"
+
+  output$dynamicPageTitle <- renderText({
+    pageTitle
+  })
     
   output$plot <- renderForceNetwork({
     df <- word_data() %>%
@@ -174,10 +180,13 @@ output$plotZKim <- renderPlotly({
     marker = list(color = "#30579B")
    ) %>%
     layout(
-      xaxis = list(title = "Number of Sent Messages", fixedrange = TRUE),
+      xaxis = list(
+        title = "Number of Sent Messages",
+        fixedrange = TRUE),
       yaxis = list(title = "Person/Group Name", fixedrange = TRUE),
       plot_bgcolor = "transparent",
-      paper_bgcolor = "transparent"
+      paper_bgcolor = "transparent",
+      font = list(size = 16, family = "Arial Black")
     ) %>% 
     config(displayModeBar = FALSE)
 })
@@ -206,16 +215,20 @@ output$plotOdKogo <- renderPlotly({
     plotdata,
     x = ~n,
     y = ~reorder(sender_name, n),
-    type = 'bar',
-    marker = list(color = "#0594ff")
+    type = 'bar'
+    # marker = list(color = "#0594ff")
     ) %>%
     layout(
-      xaxis = list(title = "Number of Sent Messages"),
-      yaxis = list(title = "Person/Group Name"),
+      xaxis = list(
+        title = "Number of Sent Messages",
+        fixedrange = TRUE),
+      yaxis = list(title = "Person/Group Name",
+      fixedrange = TRUE),
       plot_bgcolor = "transparent",
       paper_bgcolor = "transparent",
       font = list(size = 16, family = "Arial Black")
-    )
+    ) %>% 
+    config(displayModeBar = FALSE)
 })
   
 })

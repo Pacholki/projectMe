@@ -11,8 +11,123 @@ g.point {
     clip-path: inset(0% 0% 0% 0% round 2px 6px 6px 2px);
 }
 
-g.ytick>text {
-    fill: var(--mywhite);
+g.point>path {
+    fill: var(--chart-bar-blue) !important;
+}
+
+g .xgrid.crisp {
+    stroke: var(--accent-pink) !important;
+    stroke-width: 2px !important;
+    opacity: 0.7 !important;
+}
+
+g.xaxislayer-above {
+    position:absolute;
+    translate: 0 20px;
+}
+
+g.g-xtitle>text,
+g.g-ytitle>text {
+    fill: var(--mywhite) !important;
     font-family: "Open Sans" !important;
+    font-weight: 800 !important;
+    margin-top: 50px;
+}
+
+g.ytick>text {
+    fill: var(--mygray) !important;
+    font-family: "Open Sans" !important;
+    font-weight: 800 !important;
     font-size: 16px !important;
+
+    position: absolute;
+    translate: -15px 0;
+}
+
+.content-wrapper .title-bar {
+    position: absolute;
+    translate: 0 -100px;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+}
+
+.content-wrapper .title-bar .profile-picture {
+    background-color: var(--accent-blue);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: relative;
+    margin-left: 20px;
+    transition: transform 0.2s ease-out;
+    cursor: pointer;
+}
+
+.content-wrapper .title-bar .activity-status {
+    box-sizing: border-box;
+    background-color: var(--active-green);
+    border: 3px solid black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: transform 0.2s ease-out;
+}
+
+.content-wrapper .title-bar .profile-picture:hover {
+    transform: scale(0.96);
+}
+
+.content-wrapper .title-bar .profile-picture:hover .activity-status {
+    transform: scale(1.2);
+}
+
+.content-wrapper .title-bar .title-box {
+    margin-left: 30px;
+}
+
+.content-wrapper .title-bar .title-text {
+    font-size: 36px;
+    font-weight: 700;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    cursor: pointer;
+}
+
+.content-wrapper .title-bar .title-text:hover {
+    color: var(--accent-pink);
+    transform: scale(1.01);
+}
+
+.content-wrapper .title-bar .status-text {
+    color: var(--faded-blue);
+    font-size: 15px;
+    font-weight: 500;
+    width: fit-content;
+    transition: transform 0.3s ease-out, color 0.3s ease-out;
+}
+
+.content-wrapper .title-bar .status-text:hover {
+    cursor: pointer;
+    transform: scale(1.05) rotate(1deg);
+    color: var(--active-green);
+}
+
+.content-wrapper .title-bar .icon-box {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    color: var(--accent-pink);
+}
+
+.content-wrapper .title-bar .icon-box>i {
+    transition: transform 0.5s ease-out;
+    cursor: pointer;
+}
+.content-wrapper .title-bar .icon-box>i:hover {
+    transform: rotate(10deg);
 }

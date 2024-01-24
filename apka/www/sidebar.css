@@ -4,10 +4,10 @@
     width: var(--sidebar-width);
 }
 
-.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+.skin-blue .main-sidebar {
     background-color: var(--navbar-blue);
+    border-right: 5px solid var(--accent-pink);
 }
-
 
 .skin-blue .sidebar-menu>li,
 .skin-blue .treeview-menu>li {
@@ -25,7 +25,7 @@
     font-weight: 700;
     font-size: 25px;
     user-select: none;
-    transition: color 0.2s ease-out, transform 0.2s ease-out, border 0.2s ease-out, text-shadow 0.2s ease-out;
+    transition: color 0.3s ease-out, transform 0.3s ease-out, border 0.3s ease-out, text-shadow 0.3s ease-out;
 }
 
 .skin-blue .sidebar-menu>li:hover>a,

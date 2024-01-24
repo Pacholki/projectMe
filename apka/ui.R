@@ -4,7 +4,34 @@ library(networkD3)
 
 grafUI <- fluidPage(
   fluidRow(
-    titlePanel("Jakich słów najczęściej używamy?"),
+    tags$div(
+      tags$div(
+        tags$div(
+          "",
+          class = "activity-status"
+        ),
+        "",
+        class = "profile-picture"
+      ),
+      tags$div(
+        tags$div(
+          "What words are constantly longing our attention?",
+          class = "title-text"
+        ),
+        tags$div(
+          "Active now",
+          class = "status-text"
+        ),
+        class = "title-box"
+      ),
+      tags$div(
+        icon("phone"),
+        icon("video"),
+        icon("circle-info"),
+        class = "icon-box fa-3x"
+      ),
+      class = "title-bar white-text"
+    ),
     sliderInput("charNr",
                 "Wybierz liczbe znakow",
                 step = 1,
@@ -24,7 +51,34 @@ grafUI <- fluidPage(
 
 plotKiedyUI <- fluidPage(
   fluidRow(
-    titlePanel("Kiedy najczęściej piszemy?"),
+    tags$div(
+      tags$div(
+        tags$div(
+          "",
+          class = "activity-status"
+        ),
+        "",
+        class = "profile-picture"
+      ),
+      tags$div(
+        tags$div(
+          "When did we feel most lonely this year",
+          class = "title-text"
+        ),
+        tags$div(
+          "Active now",
+          class = "status-text"
+        ),
+        class = "title-box"
+      ),
+      tags$div(
+        icon("phone"),
+        icon("video"),
+        icon("circle-info"),
+        class = "icon-box fa-3x"
+      ),
+      class = "title-bar white-text"
+    ),
     radioButtons("time",
                  "Wybierz dla jakiej zmiennej chcesz poznać rozkład",
                  choices = c("Month", "Day Of Month", "Hour"),
@@ -36,7 +90,34 @@ plotKiedyUI <- fluidPage(
 
 plotZKimUI <- fluidPage(
   fluidRow(
-    titlePanel("Do kogo najwięcej piszemy?"),
+    tags$div(
+      tags$div(
+        tags$div(
+          "",
+          class = "activity-status"
+        ),
+        "",
+        class = "profile-picture"
+      ),
+      tags$div(
+        tags$div(
+          "These are the people that we like the most",
+          class = "title-text"
+        ),
+        tags$div(
+          "Active now",
+          class = "status-text"
+        ),
+        class = "title-box"
+      ),
+      tags$div(
+        icon("phone"),
+        icon("video"),
+        icon("circle-info"),
+        class = "icon-box fa-3x"
+      ),
+      class = "title-bar white-text"
+    ),
     radioButtons("zKim",
                  "",
                  choices = c("Groups", "People", "All"),
@@ -46,7 +127,34 @@ plotZKimUI <- fluidPage(
 )
 plotOdKogoUI <- fluidPage(
   fluidRow(
-    titlePanel("Kto do nas najwięcej pisze?"),
+    tags$div(
+      tags$div(
+        tags$div(
+          "",
+          class = "activity-status"
+        ),
+        "",
+        class = "profile-picture"
+      ),
+      tags$div(
+        tags$div(
+          "Those people were constantly thinking about us this year",
+          class = "title-text"
+        ),
+        tags$div(
+          "Active now",
+          class = "status-text"
+        ),
+        class = "title-box"
+      ),
+      tags$div(
+        icon("phone"),
+        icon("video"),
+        icon("circle-info"),
+        class = "icon-box fa-3x"
+      ),
+      class = "title-bar white-text"
+    ),
     radioButtons("odKogo",
                  "",
                  choices = c("Groups", "People", "All"),
@@ -63,7 +171,6 @@ shinyUI(
     dashboardSidebar(
       sidebarMenu(
         id = 'tabs',
-        
         menuItem("Z kim piszemy?", icon = icon("users"),
                  menuSubItem("Do kogo piszemy", tabName = "wykres1"),
                  menuSubItem("Kto do nas pisze", tabName = "wykres2")),
