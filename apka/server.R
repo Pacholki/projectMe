@@ -40,26 +40,32 @@ shinyServer(function(input, output, session){
       words_Michal
     }
   })
+
+  pageTitle <- "Siema i cie nie ma"
+
+  output$dynamicPageTitle <- renderText({
+    pageTitle
+  })
     
   output$plot <- renderForceNetwork({
     df <- word_data() %>%
       filter(nchar(word) %in% input$charNr)
     
-    df2 <- df %>% 
+    df <- df %>% 
       arrange(desc(count)) %>% 
       head(input$wordsNr)
 
     Links <- data.frame(
-      source = rep(0, nrow(df2)),   # Źródło krawędzi
-      target = 1:nrow(df2),         # Cel krawędzi
-      value = df2$count             # Wartość (liczba wystąpień słowa)
+      source = rep(0, nrow(df)),   # Źródło krawędzi
+      target = 1:nrow(df),         # Cel krawędzi
+      value = df$count             # Wartość (liczba wystąpień słowa)
     )
     
     # Tworzenie węzłów (Nodes) - użyj kolumny word jako nazwy węzłów
     Nodes <- data.frame(
-      name = c(input$user, df2$word),     # Nazwy węzłów
-      size = c(20, df2$count*4500/mac(df2$count)),          # Rozmiar węzłów
-      group = c(0, rep(1, nrow(df2)))     # Grupa węzłów
+      name = c(input$user, df$word),     # Nazwy węzłów
+      size = c(20, df$count*4500/max(df$count)),          # Rozmiar węzłów
+      group = c(0, rep(1, nrow(df)))     # Grupa węzłów
       # group = c(" ", word_data$count)
     )
 
@@ -80,13 +86,13 @@ shinyServer(function(input, output, session){
       opacity = 1,
       zoom = TRUE,
       Nodesize = "size",
-      linkDistance = 100,
-      linkWidth = 3,
-      charge = -200,
+      linkDistance = 200,
+      linkWidth = 4,
+      charge = -300,
       opacityNoHover = 1,
       legend = FALSE,
-      fontFamily = "Arial",
-      fontSize = 12
+      # fontFamily = "Arial",
+      # fontSize = 12
     )
     
     htmlwidgets::onRender(
@@ -169,18 +175,17 @@ output$plotZKim <- renderPlotly({
   plot_ly(
     plotdata,
     x = ~n,
-    y = ~reorder(receiver_name, n),
-    type = 'bar',
-    marker = list(color = "#30579B", width = 2),
-    hoverinfo = "siema"
+    y = ~reorder(substr(receiver_name, 1, 20), n),
+    type = 'bar'
    ) %>%
     layout(
-      xaxis = list(title = "Number of Sent Messages", fixedrange = TRUE),
+      xaxis = list(
+        title = "Number of Sent Messages",
+        fixedrange = TRUE),
       yaxis = list(title = "Person/Group Name", fixedrange = TRUE),
       plot_bgcolor = "transparent",
       paper_bgcolor = "transparent",
-      # font = list(size = 16, family = "Arial Black"),
-      bargap = 0.1
+      font = list(size = 16, family = "Arial Black")
     ) %>% 
     config(displayModeBar = FALSE)
 })
@@ -205,14 +210,23 @@ output$plotOdKogo <- renderPlotly({
     arrange(desc(n)) %>%
     head(10)
   
-  plot_ly(plotdata, x = ~n, y = ~reorder(sender_name, n), type = 'bar', marker = list(color = "#0594ff")) %>%
+  plot_ly(
+    plotdata,
+    x = ~n,
+    y = ~reorder(substr(sender_name, 1, 20), n),
+    type = 'bar'
+    ) %>%
     layout(
-      xaxis = list(title = "Number of Sent Messages"),
-      yaxis = list(title = "Person/Group Name"),
+      xaxis = list(
+        title = "Number of Sent Messages",
+        fixedrange = TRUE),
+      yaxis = list(title = "Person/Group Name",
+      fixedrange = TRUE),
       plot_bgcolor = "transparent",
       paper_bgcolor = "transparent",
       font = list(size = 16, family = "Arial Black")
-    )
+    ) %>% 
+    config(displayModeBar = FALSE)
 })
   
 })
