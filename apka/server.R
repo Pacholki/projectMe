@@ -171,16 +171,13 @@ output$plotZKim <- renderPlotly({
     x = ~n,
     y = ~reorder(receiver_name, n),
     type = 'bar',
-    marker = list(color = "#30579B", width = 2),
-    hoverinfo = "siema"
+    marker = list(color = "#30579B")
    ) %>%
     layout(
       xaxis = list(title = "Number of Sent Messages", fixedrange = TRUE),
       yaxis = list(title = "Person/Group Name", fixedrange = TRUE),
       plot_bgcolor = "transparent",
-      paper_bgcolor = "transparent",
-      # font = list(size = 16, family = "Arial Black"),
-      bargap = 0.1
+      paper_bgcolor = "transparent"
     ) %>% 
     config(displayModeBar = FALSE)
 })
@@ -205,7 +202,13 @@ output$plotOdKogo <- renderPlotly({
     arrange(desc(n)) %>%
     head(10)
   
-  plot_ly(plotdata, x = ~n, y = ~reorder(sender_name, n), type = 'bar', marker = list(color = "#0594ff")) %>%
+  plot_ly(
+    plotdata,
+    x = ~n,
+    y = ~reorder(sender_name, n),
+    type = 'bar',
+    marker = list(color = "#0594ff")
+    ) %>%
     layout(
       xaxis = list(title = "Number of Sent Messages"),
       yaxis = list(title = "Person/Group Name"),

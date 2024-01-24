@@ -36,21 +36,21 @@ plotKiedyUI <- fluidPage(
 
 plotZKimUI <- fluidPage(
   fluidRow(
+    titlePanel("Do kogo najwięcej piszemy?"),
     radioButtons("zKim",
                  "",
                  choices = c("Groups", "People", "All"),
                  selected = "All"),
-    titlePanel("Do kogo najwięcej piszemy?"),
     plotlyOutput("plotZKim")
   )
 )
 plotOdKogoUI <- fluidPage(
   fluidRow(
+    titlePanel("Kto do nas najwięcej pisze?"),
     radioButtons("odKogo",
                  "",
                  choices = c("Groups", "People", "All"),
                  selected = "All"),
-    titlePanel("Kto do nas najwięcej pisze?"),
     plotlyOutput("plotOdKogo")
   )
 )
@@ -75,8 +75,9 @@ shinyUI(
                              c("Mateusz",
                                "Kornel",
                                "Michał"),
-                             selected = 'Michał'),
-                 icon = icon("user")
+                             selected = 'Kornel'),
+                 icon = icon("user"),
+                 class = "siema"
         ),
         class = "fa-2x"
       )

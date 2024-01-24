@@ -6,6 +6,9 @@
     --body-blue: #182039;
     --body-top-blue: #212B4E;
 
+    --border-dark-blue: #182039;
+    --item-light-blue: #284679;
+
     --chart-bar-blue: #30579B;
 
     --accent-blue: #3c8dbc;
@@ -14,10 +17,6 @@
     --header-height: 140px;
     --title-height: 100px;
     --sidebar-width: 450px;
-}
-
-body {
-    overflow: hidden;
 }
 
 .white-text {
