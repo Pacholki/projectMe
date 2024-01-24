@@ -6,13 +6,14 @@
     --body-blue: #182039;
     --body-top-blue: #212B4E;
 
-    --border-dark-blue: #182039;
+    --border-dark-blue: #0c1120;
     --item-light-blue: #284679;
 
     --active-green: #45CC58;
     --faded-blue: #B1C5DB;
 
     --chart-bar-blue: #30579B;
+    --element-island-blue: #27335D;
 
     --accent-blue: #3c8dbc;
     --accent-pink: #F85582;
@@ -38,4 +39,3 @@ body {
     color: var(--mywhite);
     font-family: "Open Sans";
 }
-

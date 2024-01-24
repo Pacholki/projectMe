@@ -32,20 +32,29 @@ grafUI <- fluidPage(
       ),
       class = "title-bar white-text"
     ),
-    sliderInput("charNr",
-                "Wybierz liczbe znakow",
-                step = 1,
-                min = 1,
-                max = 20,
-                value = c(4, 20)),
-    sliderInput("wordsNr",
-                "Wybierz liczbe slow",
-                step = 1,
-                min = 1,
-                max = 10,
-                value = 5),
-                
-    forceNetworkOutput("plot")
+    tags$div(
+      tags$div(
+        sliderInput(
+          "charNr",
+          "Wybierz liczbe znakow",
+          step = 1,
+          min = 1,
+          max = 19,
+          value = c(4, 12)
+        ),
+        sliderInput(
+          "wordsNr",
+          "Wybierz liczbe slow",
+          step = 1,
+          min = 1,
+          max = 10,
+          value = 7
+        ),
+        class = "input-box"
+      ),
+      forceNetworkOutput("plot"),
+      class = "main-dish main-dish-graph"
+    )
   )
 )
 
@@ -79,12 +88,18 @@ plotKiedyUI <- fluidPage(
       ),
       class = "title-bar white-text"
     ),
-    radioButtons("time",
-                 "Wybierz dla jakiej zmiennej chcesz poznać rozkład",
-                 choices = c("Month", "Day Of Month", "Hour"),
-                 selected = "Hour"),
+    tags$div(
+      tags$div(
+        radioButtons("time",
+          "Wybierz okres:",
+          choices = c("Month", "Day Of Month", "Hour"),
+          selected = "Hour"),
+        class = "input-box"
+      ),
+      plotOutput("plotKiedy"),
+      class = "main-dish main-dish-when"
+    )
     
-    plotOutput("plotKiedy")
   )
 )
 
@@ -118,11 +133,17 @@ plotZKimUI <- fluidPage(
       ),
       class = "title-bar white-text"
     ),
-    radioButtons("zKim",
-                 "",
-                 choices = c("Groups", "People", "All"),
-                 selected = "All"),
-    plotlyOutput("plotZKim")
+    tags$div(
+      tags$div(
+        radioButtons("zKim",
+          "Z kim",
+          choices = c("Groups", "People", "All"),
+          selected = "All"),
+        class = "input-box"
+      ),
+      plotlyOutput("plotZKim"),
+      class = "main-dish main-dish-towho"
+    )
   )
 )
 plotOdKogoUI <- fluidPage(
@@ -155,11 +176,17 @@ plotOdKogoUI <- fluidPage(
       ),
       class = "title-bar white-text"
     ),
-    radioButtons("odKogo",
-                 "",
-                 choices = c("Groups", "People", "All"),
-                 selected = "All"),
-    plotlyOutput("plotOdKogo")
+    tags$div(
+      tags$div(
+        radioButtons("odKogo",
+          "Ok kogo",
+          choices = c("Groups", "People", "All"),
+          selected = "All"),
+        class = "input-box"
+      ),
+      plotlyOutput("plotOdKogo"),
+      class = "main-dish main-dish-fromwho"
+    )
   )
 )
 
@@ -167,7 +194,6 @@ shinyUI(
   dashboardPage(
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
                                    "MENELIZER", class = "white-text")),
-    
     dashboardSidebar(
       sidebarMenu(
         id = 'tabs',

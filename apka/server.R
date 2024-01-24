@@ -51,21 +51,21 @@ shinyServer(function(input, output, session){
     df <- word_data() %>%
       filter(nchar(word) %in% input$charNr)
     
-    df2 <- df %>% 
+    df <- df %>% 
       arrange(desc(count)) %>% 
       head(input$wordsNr)
 
     Links <- data.frame(
-      source = rep(0, nrow(df2)),   # Źródło krawędzi
-      target = 1:nrow(df2),         # Cel krawędzi
-      value = df2$count             # Wartość (liczba wystąpień słowa)
+      source = rep(0, nrow(df)),   # Źródło krawędzi
+      target = 1:nrow(df),         # Cel krawędzi
+      value = df$count             # Wartość (liczba wystąpień słowa)
     )
     
     # Tworzenie węzłów (Nodes) - użyj kolumny word jako nazwy węzłów
     Nodes <- data.frame(
-      name = c(input$user, df2$word),     # Nazwy węzłów
-      size = c(20, df2$count*5),          # Rozmiar węzłów
-      group = c(0, rep(1, nrow(df2)))     # Grupa węzłów
+      name = c(input$user, df$word),     # Nazwy węzłów
+      size = c(20, df$count*5),          # Rozmiar węzłów
+      group = c(0, rep(1, nrow(df)))     # Grupa węzłów
       # group = c(" ", word_data$count)
     )
 
@@ -86,13 +86,13 @@ shinyServer(function(input, output, session){
       opacity = 1,
       zoom = TRUE,
       Nodesize = "size",
-      linkDistance = 100,
-      linkWidth = 3,
-      charge = -200,
+      linkDistance = 200,
+      linkWidth = 4,
+      charge = -300,
       opacityNoHover = 1,
       legend = FALSE,
-      fontFamily = "Arial",
-      fontSize = 12
+      # fontFamily = "Arial",
+      # fontSize = 12
     )
     
     htmlwidgets::onRender(
@@ -175,9 +175,8 @@ output$plotZKim <- renderPlotly({
   plot_ly(
     plotdata,
     x = ~n,
-    y = ~reorder(receiver_name, n),
-    type = 'bar',
-    marker = list(color = "#30579B")
+    y = ~reorder(substr(receiver_name, 1, 20), n),
+    type = 'bar'
    ) %>%
     layout(
       xaxis = list(
@@ -214,9 +213,8 @@ output$plotOdKogo <- renderPlotly({
   plot_ly(
     plotdata,
     x = ~n,
-    y = ~reorder(sender_name, n),
+    y = ~reorder(substr(sender_name, 1, 20), n),
     type = 'bar'
-    # marker = list(color = "#0594ff")
     ) %>%
     layout(
       xaxis = list(

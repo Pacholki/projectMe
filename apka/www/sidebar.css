@@ -1,5 +1,6 @@
 .left-side, .main-sidebar {
     margin-top: 20px;
+    height: (100% - 20px);
     padding-top: var(--header-height);
     width: var(--sidebar-width);
 }
