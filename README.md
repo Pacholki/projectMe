@@ -10,11 +10,14 @@ Messenger data visualisation dashboard for Data Visualization Techniques course 
 ### Main panel
 
 <div align="center">
-  <img src="Visualizations/app1.png" width="600"/>
+  <img src="Visualizations/app1.png" width="1200"/>
 </div>
 
 ### Other panels
 
 <div align="center">
-  <img src="Visualizations/app2.png" width="600"/>
+  <img src="Visualizations/app2.png" width="1200"/>
+</div>
+<div align="center">
+  <img src="Visualizations/Zrzut ekranu 2024-01-24 234800.png" width="1200"/>
 </div>
