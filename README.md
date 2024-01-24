@@ -11,12 +11,12 @@ To see the app click
 
 ### Main panel
 
-div align="center">
+<div align="center">
   <img src="Visualizations/app1.png" width="600"/>
 </div>
 
 ### Other panels
 
-div align="center">
+<div align="center">
   <img src="Visualizations/app2.png" width="600"/>
 </div>
