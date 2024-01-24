@@ -58,7 +58,7 @@ shinyServer(function(input, output, session){
     # Tworzenie węzłów (Nodes) - użyj kolumny word jako nazwy węzłów
     Nodes <- data.frame(
       name = c(input$user, df2$word),     # Nazwy węzłów
-      size = c(20, df2$count*5),          # Rozmiar węzłów
+      size = c(20, df2$count*4500/mac(df2$count)),          # Rozmiar węzłów
       group = c(0, rep(1, nrow(df2)))     # Grupa węzłów
       # group = c(" ", word_data$count)
     )
