@@ -6,7 +6,7 @@ To see the app click
 **[here](https://fylypo.shinyapps.io/SpotifyApp/)**.
 
 ### Authors
-[@korneltlaczala](https://github.com/korneltlaczala) [@Zajaczkowskim](https://github.com/Zajaczkowskim) [@DeptuchMateusz](https://github.com/DeptuchMateusz)
+[KornelTlaczala](https://github.com/korneltlaczala) [@MichalZajaczkowski](https://github.com/Zajaczkowskim) [@MateuszDeptuch](https://github.com/DeptuchMateusz)
 
 
 ### Main panel
