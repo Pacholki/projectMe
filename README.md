@@ -1,18 +1,23 @@
 # projectMe
 
-**Repository for our TWD project**
+Messenger data visualisation dashboard for Data Visualization Techniques course in the second year of Data Science studies at the Warsaw University of Technology. The aim was to prepare interactive dashboard which presents data analysis about authors. We chose data from messaging app - Messenger and visualized them in shiny dashboard.
+
 
 ### Authors
-[@korneltlaczala](https://github.com/korneltlaczala) [@Zajaczkowskim](https://github.com/Zajaczkowskim) [@DeptuchMateusz](https://github.com/DeptuchMateusz)
+[KornelTlaczala](https://github.com/korneltlaczala) [@MichalZajaczkowski](https://github.com/Zajaczkowskim) [@MateuszDeptuch](https://github.com/DeptuchMateusz)
 
-### Structure
 
-- home/ (this repository)
-    - json_data/
-    - prepare_data/
-    - csv_data/
+### Main panel
 
-Code in the prepare_data directory will take data from your json_data folder and convert it to csv files in csv_data folder.
-Additionally it will remove all non-json files (such as photos, videos, etc.) from json_data directory.
-Moreover it will extract data for further analysis and remove all confidential information, leaving you with files that you can upload to the git repository.
+<div align="center">
+  <img src="Visualizations/app1.png" width="1200"/>
+</div>
 
+### Other panels
+
+<div align="center">
+  <img src="Visualizations/app2.png" width="1200"/>
+</div>
+<div align="center">
+  <img src="Visualizations/Zrzut ekranu 2024-01-24 234800.png" width="1200"/>
+</div>
