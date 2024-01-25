@@ -15,7 +15,7 @@ grafUI <- fluidPage(
       ),
       tags$div(
         tags$div(
-          "What words are constantly longing our attention?",
+          "What hides in our head?",
           class = "title-text"
         ),
         tags$div(
@@ -36,7 +36,7 @@ grafUI <- fluidPage(
       tags$div(
         sliderInput(
           "charNr",
-          "Wybierz liczbe znakow",
+          "How many characters?",
           step = 1,
           min = 1,
           max = 19,
@@ -44,7 +44,7 @@ grafUI <- fluidPage(
         ),
         sliderInput(
           "wordsNr",
-          "Wybierz liczbe slow",
+          "How many words?",
           step = 1,
           min = 1,
           max = 10,
@@ -71,7 +71,7 @@ plotKiedyUI <- fluidPage(
       ),
       tags$div(
         tags$div(
-          "When did we feel most lonely this year",
+          "Do we even sleep?",
           class = "title-text"
         ),
         tags$div(
@@ -91,15 +91,14 @@ plotKiedyUI <- fluidPage(
     tags$div(
       tags$div(
         radioButtons("time",
-          "Wybierz okres:",
+          "Choose period:",
           choices = c("Month", "Day Of Month", "Hour"),
           selected = "Hour"),
         class = "input-box"
       ),
-      plotOutput("plotKiedy"),
+      plotlyOutput("plotKiedy"),
       class = "main-dish main-dish-when"
     )
-    
   )
 )
 
@@ -193,24 +192,23 @@ plotOdKogoUI <- fluidPage(
 shinyUI(
   dashboardPage(
     dashboardHeader(title = tags$a(tags$img(src="messengerLogo.png", height=40, width=40),
-                                   "MENELIZER", class = "white-text")),
+                                   "MESSENGE(R)", class = "white-text")),
     dashboardSidebar(
       sidebarMenu(
         id = 'tabs',
-        menuItem("Z kim piszemy?", icon = icon("users"),
-                 menuSubItem("Do kogo piszemy", tabName = "wykres1"),
-                 menuSubItem("Kto do nas pisze", tabName = "wykres2")),
-        menuItem("Kiedy piszemy", icon = icon("clock"), tabName = "wykres5"),
-        menuItem("Co piszemy?", icon = icon("comment-dots"), tabName = "wykres3"),
+        menuItem("Who do we message?", icon = icon("users"),
+                 menuSubItem("Messages out", tabName = "wykres1"),
+                 menuSubItem("Messages in", tabName = "wykres2")),
+        menuItem("When do we write?", icon = icon("clock"), tabName = "wykres5"),
+        menuItem("What do we write?", icon = icon("comment-dots"), tabName = "wykres3"),
         
         menuItem(selectInput("user",
-                             "Wybierz osobę: ",
+                             "Choose your hero: ",
                              c("Mateusz",
                                "Kornel",
                                "Michał"),
                              selected = 'Kornel'),
-                 icon = icon("user"),
-                 class = "siema"
+                 icon = icon("user")
         ),
         class = "fa-2x"
       )

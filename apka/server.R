@@ -41,12 +41,6 @@ shinyServer(function(input, output, session){
     }
   })
 
-  pageTitle <- "Siema i cie nie ma"
-
-  output$dynamicPageTitle <- renderText({
-    pageTitle
-  })
-    
   output$plot <- renderForceNetwork({
     df <- word_data() %>%
       filter(nchar(word) %in% input$charNr)
@@ -64,7 +58,7 @@ shinyServer(function(input, output, session){
     # Tworzenie węzłów (Nodes) - użyj kolumny word jako nazwy węzłów
     Nodes <- data.frame(
       name = c(input$user, df$word),     # Nazwy węzłów
-      size = c(20, df$count*4500/max(df$count)),          # Rozmiar węzłów
+      size = c(20, df$count*6000/max(df$count)),          # Rozmiar węzłów
       group = c(0, rep(1, nrow(df)))     # Grupa węzłów
       # group = c(" ", word_data$count)
     )
@@ -91,8 +85,6 @@ shinyServer(function(input, output, session){
       charge = -300,
       opacityNoHover = 1,
       legend = FALSE,
-      # fontFamily = "Arial",
-      # fontSize = 12
     )
     
     htmlwidgets::onRender(
@@ -103,52 +95,64 @@ shinyServer(function(input, output, session){
     )
 
   })
-  
-  output$plotKiedy <- renderPlot({
-    
+
+  output$plotKiedy <- renderPlotly({
     df <- data() %>%
-      mutate(timestamp =  as.POSIXct(timestamp / 1000, origin="1970-01-01"))%>%
-      filter(sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch", ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski"))) %>%
-      mutate(Date = as.Date(timestamp),
-             Time = format(timestamp, "%H:%M:%Y"),
-             Hour = hour(timestamp),
-             Month = month(timestamp),
-             Day = day(timestamp))
+      mutate(timestamp = as.POSIXct(timestamp / 1000, origin = "1970-01-01")) %>%
+      filter(
+        sender_name == ifelse(input$user == "Mateusz", "Mati Deptuch",
+          ifelse(input$user == "Kornel", "Kornel Tłaczała", "Michał Zajączkowski")
+        )
+      ) %>%
+      mutate(
+        Date = as.Date(timestamp),
+        Time = format(timestamp, "%H:%M:%Y"),
+        Hour = hour(timestamp),
+        Month = month(timestamp),
+        Day = day(timestamp)
+      )
     
-    if(input$time == "Hour"){
-      plotdata <- df %>% 
-        group_by(Hour) %>% 
+    if (input$time == "Hour") {
+      plotdata <- df %>%
+        group_by(Hour) %>%
         summarise(n = n())
       plotdata$n <- plotdata$n / 365
       
-    p <- ggplot(plotdata, aes(x = Hour, y = n)) + 
-      geom_col(fill = "#0594ff")+
-      labs(x = "Hour", y = "Average Number of Sent Messages") +
-      scale_x_continuous(breaks = seq(0, 23, 1))
+      p <- plot_ly(plotdata, x = ~Hour, y = ~n, type = 'bar', marker = list(color = "#0594ff")) %>%
+        layout(xaxis = list(title = "Hour", tickmode = "array", tickvals = seq(0, 24, 1)), yaxis = list(title = "Average number of sent messages"))
     }
-    if(input$time == "Day Of Month"){
-      plotdata <- df %>% 
-        group_by(Day) %>% 
+
+    if (input$time == "Day Of Month") {
+      plotdata <- df %>%
+        group_by(Day) %>%
         summarise(n = n())
       plotdata$n <- plotdata$n / 12
-      p <- ggplot(plotdata, aes(x = Day, y = n)) + 
-        geom_col(fill = "#0594ff")+
-        labs(x = "Day Of Month", y = "Average Number of Sent Messages") +
-        scale_x_continuous(breaks = seq(1, 31, 1))
+      
+      p <- plot_ly(plotdata, x = ~Day, y = ~n, type = 'bar', marker = list(color = "#0594ff")) %>%
+        layout(xaxis = list(title = "Day Of Month", tickmode = "array", tickvals = seq(1, 31, 1)), yaxis = list(title = "Average number of messages sent daily"))
     }
-    if(input$time == "Month"){
-      p <- ggplot(df, aes(x = factor(Month)))+ 
-        geom_bar(fill = "#0594ff")+
-        labs(x = "Month", y = "Number of Sent Messages") + 
-        scale_x_discrete(name = "Month", labels = month.abb) 
+
+    if (input$time == "Month") {
+      plotdata <- df %>% 
+        group_by(Month) %>% 
+        summarise(n = n())
+
+      plotdata$Month <- month.abb[plotdata$Month]
+
+      p <- plot_ly(plotdata, x = ~Month, y = ~n, type = 'bar', marker = list(color = "#0594ff")) %>%
+        layout(xaxis = list(title = "Month", categoryorder = "array", categoryarray = month.abb),
+              yaxis = list(title = "Number of sent messages"))
     }
-    p + theme(
-      plot.background = element_rect(fill = "transparent"),
-      panel.background = element_rect(fill = "transparent"),
-      axis.text = element_text( size = rel(1.5), family = "Helvetica Neue"),
-      axis.title = element_text( size = rel(1.5), family = "Helvetica Neue"))
     
-    
+    p %>%
+      layout(
+        xaxis = list(fixedrange = TRUE),
+        yaxis = list(fixedrange = TRUE),
+        plot_bgcolor = "transparent",
+        paper_bgcolor = "transparent",
+        font = list(family = "Helvetica Neue", size = 18)
+      ) %>% 
+    config(displayModeBar = FALSE)
   })
   
 output$plotZKim <- renderPlotly({
@@ -180,9 +184,9 @@ output$plotZKim <- renderPlotly({
    ) %>%
     layout(
       xaxis = list(
-        title = "Number of Sent Messages",
+        title = "Number of sent messages",
         fixedrange = TRUE),
-      yaxis = list(title = "Person/Group Name", fixedrange = TRUE),
+      yaxis = list(title = "Person/group name", fixedrange = TRUE),
       plot_bgcolor = "transparent",
       paper_bgcolor = "transparent",
       font = list(size = 16, family = "Arial Black")
@@ -218,9 +222,9 @@ output$plotOdKogo <- renderPlotly({
     ) %>%
     layout(
       xaxis = list(
-        title = "Number of Sent Messages",
+        title = "Number of sent messages",
         fixedrange = TRUE),
-      yaxis = list(title = "Person/Group Name",
+      yaxis = list(title = "Person/group name",
       fixedrange = TRUE),
       plot_bgcolor = "transparent",
       paper_bgcolor = "transparent",

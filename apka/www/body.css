@@ -49,7 +49,7 @@
     font-family: "Open Sans" !important;
     font-size: 20px !important;
     font-weight: 700 !important;
-    translate: -37px;
+    translate: -55px;
 }
 
 .main-dish {
@@ -88,6 +88,15 @@
     padding: 15px 25px;
     margin-top: 20px;
     font-family: "Open Sans";
+    transition: transform 0.2s ease-out;
+}
+
+.skin-blue .main-dish-when .input-box .form-group .control-label {
+    font-size: 30px;
+}
+
+.skin-blue .input-box .form-group:hover {
+    transform: scale(1.01);
 }
 
 .skin-blue .input-box .form-group .control-label {
@@ -139,7 +148,8 @@
 }
 
 .skin-blue .main-dish-graph .input-box .form-group .irs-handle {
-    background-color: var(--accent-pink);
+    /* background-color: var(--accent-pink); */
+    background-color: var(--slider-blue);
     border: 2px solid var(--mywhite);
 }
 
@@ -148,12 +158,17 @@
     background: transparent;
 }
 
+.skin-blue .main-dish-graph .input-box .form-group:hover {
+    transform: none;
+}
+
 /* -------------------------------------------- */
 /* PLOTLY PAGES SETTINGS */
 /* -------------------------------------------- */
 
 .main-dish-towho,
-.main-dish-fromwho {
+.main-dish-fromwho,
+.main-dish-when {
     height: 500px;
 }
 
@@ -171,7 +186,7 @@
 }
 
 .main-dish .radio {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .main-dish .radio:last-of-type {
@@ -184,15 +199,23 @@
 
 .main-dish .radio>label>input {
     position: absolute;
-    transform: translate(-23px, 12px) scale(3);
-    border: 3px solid var(--accent-pink)
+    transform: translate(-20px, 3px) scale(2.2);
+    color: var(--accent-pink);
 }
 
 .main-dish .radio>label>span {
     color: var(--mywhite);
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
-    margin-left: 15px;
+    transition: color 0.3s ease-out;
+}
+
+.main-dish .radio>label:hover>span {
+    color: var(--accent-pink);
+}
+
+.main-dish .radio>label:hover>input {
+    color: var(--accent-pink);
 }
 
 .main-dish-towho .control-label,
@@ -204,8 +227,12 @@
 /* PLOTLY SETTINGS */
 /* -------------------------------------------- */
 
-g.point {
+.main-dish g.point {
     clip-path: inset(0% 0% 0% 0% round 2px 6px 6px 2px);
+}
+
+.main-dish-when g.point {
+    clip-path: inset(0% 0% 0% 0% round 6px 6px 2px 2px);
 }
 
 g.point>path {
@@ -214,7 +241,11 @@ g.point>path {
 
 g .xgrid.crisp {
     stroke: var(--accent-pink) !important;
-    stroke-width: 2px !important;
+    opacity: 0.7 !important;
+}
+
+path.ygrid.crisp {
+    stroke: var(--accent-pink) !important;
     opacity: 0.7 !important;
 }
 
@@ -225,22 +256,39 @@ g.xaxislayer-above {
 
 g.g-xtitle>text,
 g.g-ytitle>text {
-    fill: var(--mywhite) !important;
+    fill: var(--mygray) !important;
     font-family: "Open Sans" !important;
     font-size: 14px !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     margin-top: 50px;
 }
 
-g.ytick>text {
-    fill: var(--mygray) !important;
-    font-family: "Open Sans" !important;
-    font-weight: 800 !important;
-    font-size: 16px !important;
+g.g-xtitle>text {
+    translate: -65px -50px;
+}
 
+g.g-ytitle>text {
+    translate: 0 -30px;
+}
+
+g.xtick>text,
+g.ytick>text {
+    fill: var(--mywhite) !important;
+    font-family: "Open Sans" !important;
+    font-size: 18px !important;
+}
+
+g.xtick>text {
+    font-weight: 900 !important;
+}
+
+g.ytick>text {
     position: absolute;
     translate: -15px 0;
+    font-weight: 600 !important;
 }
+
+
 
 
 /* -------------------------------------------- */
@@ -339,16 +387,3 @@ g.ytick>text {
 .content-wrapper .title-bar .icon-box>i:hover {
     transform: rotate(10deg);
 }
-
-/* -------------------------------------------- */
-/* MAIN DISH */
-/* -------------------------------------------- */
-
-
-/* .main-dish > * {
-    display: inline-block;
-} */
-
-/* -------------------------------------------- */
-/* NIE WIADOMO CO TO */
-/* -------------------------------------------- */

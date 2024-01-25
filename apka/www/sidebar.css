@@ -77,9 +77,13 @@
     background-color: var(--navbar-blue) !important;
 }
 
-.skin-blue .form-group.shiny-input-container {
-    width: 200px;
+.skin-blue .treeview .form-group.shiny-input-container {
+    width: 240px !important ;
 }
+/* 
+.skin-blue .form-group.shiny-input-container>label {
+    width: 250px !important;
+} */
 
 /* ------------------------------ */
 
