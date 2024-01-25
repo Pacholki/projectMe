@@ -10,7 +10,10 @@ grafUI <- fluidPage(
           "",
           class = "activity-status"
         ),
-        "",
+        tags$div(
+          tags$img(src="media/pudzian.png", height=70, width=70),
+          class = "profpic-box"
+        ),
         class = "profile-picture"
       ),
       tags$div(
@@ -66,7 +69,10 @@ plotKiedyUI <- fluidPage(
           "",
           class = "activity-status"
         ),
-        "",
+        tags$div(
+          tags$img(src="media/pudzian.png", height=70, width=70),
+          class = "profpic-box"
+        ),
         class = "profile-picture"
       ),
       tags$div(
@@ -110,7 +116,10 @@ plotZKimUI <- fluidPage(
           "",
           class = "activity-status"
         ),
-        "",
+        tags$div(
+          tags$img(src="media/pudzian.png", height=70, width=70),
+          class = "profpic-box"
+        ),
         class = "profile-picture"
       ),
       tags$div(
@@ -127,7 +136,9 @@ plotZKimUI <- fluidPage(
       tags$div(
         icon("phone"),
         icon("video"),
-        icon("circle-info"),
+        icon(name="circle-info"),
+        # shiny_iconlink(name="circle-info"),
+        # tags$a(href="https://www.youtube.com/watch?v=dQw4w9WgXcQ", target="_blank", "Siema"),
         class = "icon-box fa-3x"
       ),
       class = "title-bar white-text"
@@ -153,7 +164,10 @@ plotOdKogoUI <- fluidPage(
           "",
           class = "activity-status"
         ),
-        "",
+        tags$div(
+          tags$img(src="media/pudzian.png", height=70, width=70),
+          class = "profpic-box"
+        ),
         class = "profile-picture"
       ),
       tags$div(

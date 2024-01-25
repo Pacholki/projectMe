@@ -288,9 +288,6 @@ g.ytick>text {
     font-weight: 600 !important;
 }
 
-
-
-
 /* -------------------------------------------- */
 /* TITLE BAR SETTINGS */
 /* -------------------------------------------- */
@@ -320,6 +317,17 @@ g.ytick>text {
     cursor: pointer;
 }
 
+.content-wrapper .title-bar .profile-picture .profpic-box {
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.content-wrapper .title-bar .profile-picture .profpic-box>img {
+    translate: 0 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
 .content-wrapper .title-bar .activity-status {
     box-sizing: border-box;
     background-color: var(--active-green);
@@ -331,6 +339,7 @@ g.ytick>text {
     bottom: 0;
     right: 0;
     transition: transform 0.3s ease-in-out;
+    z-index: 100;
 }
 
 .content-wrapper .title-bar .profile-picture:hover {
@@ -341,13 +350,17 @@ g.ytick>text {
     transform: scale(1.2);
 }
 
+.content-wrapper .title-bar .profile-picture:hover .profpic-box>img {
+    opacity: 0.95;
+}
+
 .content-wrapper .title-bar .title-box {
     margin-right: auto;
 }
 
 .content-wrapper .title-bar .title-text {
-    font-size: 36px;
-    /* font-size: 28px; */
+    /* font-size: 36px; */
+    font-size: 28px;
     font-weight: 700;
     transition: color 0.3s ease-out, transform 0.3s ease-out;
     cursor: pointer;
