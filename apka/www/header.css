@@ -40,7 +40,7 @@
 
 .skin-blue .main-header .logo:hover .white-text {
     color: var(--accent-pink);
-    transform: scale(1.05) translate(0, 5px);
+    transform: scale(0.92) translate(0, 5px);
 }
 
 .skin-blue .main-header .logo>a>img {

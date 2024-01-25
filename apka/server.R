@@ -7,12 +7,12 @@ library(tidytext)
 library(stringi)
 library(plotly)
 
-words_Michal <- read.csv("michalWords.csv")
-words_Mateusz <- read.csv("mateuszWords.csv")
-words_Kornel <- read.csv("kornelWords.csv")
-data_Mateusz <- read.csv("mateuszCombinedNoContent.csv")
-data_Michal <- read.csv("michalCombinedNoContent.csv")
-data_Kornel <- read.csv("kornelCombinedNoContent.csv")
+words_Michal <- read.csv("data/michalWords.csv")
+words_Mateusz <- read.csv("data/mateuszWords.csv")
+words_Kornel <- read.csv("data/kornelWords.csv")
+data_Mateusz <- read.csv("data/mateuszCombinedNoContent.csv")
+data_Michal <- read.csv("data/michalCombinedNoContent.csv")
+data_Kornel <- read.csv("data/kornelCombinedNoContent.csv")
 
 shinyServer(function(input, output, session){
   # po tym reactive pracujemy na data i word_data jak na normalnych 
