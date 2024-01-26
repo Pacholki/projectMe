@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(networkD3)
+library(plotly)
 
 grafUI <- fluidPage(
   fluidRow(
